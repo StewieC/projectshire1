@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Dashboard</h1>
+  <h2>Your Groups</h2>
+  <ul>
+    {% for group in groups %}
+      <li>{{ group.name }} - Weekly Contribution: {{ group.weekly_contribution }}</li>
+    {% endfor %}
+  </ul>
+  <h2>Next Payout Cycles</h2>
+  <ul>
+    {% for cycle in payout_cycles %}
+      <li>{{ cycle.recipient }} - {{ cycle.payout_date }} - {% if cycle.status %}Paid{% else %}Pending{% endif %}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'contribute' %}">Contribute</a>
+{% endblock %}

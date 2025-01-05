@@ -1,3 +1,31 @@
 from django.db import models
+from django.contrib.auth.models import User
+from datetime import date
 
-# Create your models here.
+# models.py
+class Group(models.Model):
+    name = models.CharField(max_length=100)
+    members = models.ManyToManyField(User)
+    weekly_contribution = models.DecimalField(max_digits=10, decimal_places=2)
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2, default=25)
+
+    def __str__(self):
+        return self.name
+
+class PayoutCycle(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE)
+    payout_date = models.DateField(default=date.today)
+    status = models.BooleanField(default=False)  # True if paid
+
+    def __str__(self):
+        return f"{self.recipient} - {self.payout_date}"
+
+class Contribution(models.Model):
+    member = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    contribution_date = models.DateField(default=date.today)
+
+    def __str__(self):
+        return f"{self.member} - {self.amount} on {self.contribution_date}"
