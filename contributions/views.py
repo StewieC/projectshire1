@@ -1,22 +1,36 @@
 # views.py
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Contribution, Group, PayoutCycle
-from .forms import ContributionForm
+from .models import Group, PayoutCycle
+from .forms import GroupForm, ContributionForm
+from django.contrib import messages
 
 @login_required
 def dashboard(request):
-    user_groups = Group.objects.filter(members=request.user)
-    contributions = Contribution.objects.filter(member=request.user)
-    payout_cycles = PayoutCycle.objects.filter(group__in=user_groups).order_by('payout_date')
-    
-    context = {
-        'groups': user_groups,
-        'contributions': contributions,
-        'payout_cycles': payout_cycles,
-    }
-    return render(request, 'contributions/dashboard.html', context)
+    groups = Group.objects.filter(members=request.user)
+    group_form = GroupForm()
 
+    if request.method == 'POST':
+        if 'name' in request.POST:  # Group creation
+            group_form = GroupForm(request.POST)
+            if group_form.is_valid():
+                group = group_form.save()
+                group.members.add(request.user)
+                messages.success(request, 'Group created successfully.')
+                return redirect('dashboard')
+        elif 'group_code' in request.POST:  # Joining a group
+            group_id = request.POST.get('group_code')
+            group = get_object_or_404(Group, id=group_id)
+            group.members.add(request.user)
+            messages.success(request, 'Successfully joined the group.')
+            return redirect('dashboard')
+
+    return render(request, 'contributions/dashboard.html', {
+        'groups': groups,
+        'group_form': group_form
+    })
+    
+    
 @login_required
 def contribute(request):
     if request.method == 'POST':

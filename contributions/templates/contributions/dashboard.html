@@ -1,17 +1,39 @@
 {% extends 'contributions/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
-  <h1>Dashboard</h1>
-  <h2>Your Groups</h2>
-  <ul>
-    {% for group in groups %}
-      <li>{{ group.name }} - Weekly Contribution: {{ group.weekly_contribution }}</li>
-    {% endfor %}
-  </ul>
-  <h2>Next Payout Cycles</h2>
-  <ul>
-    {% for cycle in payout_cycles %}
-      <li>{{ cycle.recipient }} - {{ cycle.payout_date }} - {% if cycle.status %}Paid{% else %}Pending{% endif %}</li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'contribute' %}">Contribute</a>
+<h1>Welcome, {{ user.username }}</h1>
+
+<h2>Your Groups</h2>
+{% if groups %}
+    <ul>
+        {% for group in groups %}
+            <li>
+                {{ group.name }} - Contribution: {{ group.weekly_contribution }} Ksh
+                <a href="{% url 'group_detail' group.id %}">View Details</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>You are not part of any groups yet.</p>
+{% endif %}
+
+<!-- Create Group Section -->
+<h2>Create a New Group</h2>
+<form method="post" action="{% url 'create_group' %}">
+    {% csrf_token %}
+    {{ group_form.as_p }}
+    <button type="submit">Create Group</button>
+</form>
+
+<!-- Join Group Section -->
+<h2>Join an Existing Group</h2>
+<form method="post" action="{% url 'join_group' %}">
+    {% csrf_token %}
+    <label for="group_code">Enter Group ID:</label>
+    <input type="text" name="group_code" title="Group ID" placeholder="Enter Group ID" required>
+    <button type="submit">Join Group</button>
+</form>
+
 {% endblock %}
