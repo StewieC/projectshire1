@@ -31,9 +31,10 @@
 <h2>Join an Existing Group</h2>
 <form method="post" action="{% url 'join_group' %}">
     {% csrf_token %}
-    <label for="group_code">Enter Group ID:</label>
-    <input type="text" name="group_code" title="Group ID" placeholder="Enter Group ID" required>
+    <label for="group_code">Enter Join Code:</label>
+    <input type="text" name="group_code" title="Group Code" placeholder="Enter Group Code" required>
     <button type="submit">Join Group</button>
 </form>
+
 
 {% endblock %}

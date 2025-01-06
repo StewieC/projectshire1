@@ -13,15 +13,23 @@
     {% endfor %}
 </ul>
 
-<h2>Contributions</h2>
-{% if contributions %}
-    <ul>
-        {% for contribution in contributions %}
-            <li>{{ contribution.member.username }} - {{ contribution.amount }} Ksh ({{ contribution.date }})</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No contributions have been made yet.</p>
+{% if user == group.admin %}
+    <h2>Manage Members</h2>
+    <form method="post" action="{% url 'group_detail' group.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="manage_member">Submit</button>
+    </form>
+
+    <h2>Generate Join Code</h2>
+    <form method="post" action="{% url 'group_detail' group.id %}">
+        {% csrf_token %}
+        <button type="submit" name="generate_code">Generate Code</button>
+    </form>
+
+    {% if group.join_code %}
+        <p>Join Code: <strong>{{ group.join_code }}</strong></p>
+    {% endif %}
 {% endif %}
 
 <a href="{% url 'dashboard' %}">Back to Dashboard</a>

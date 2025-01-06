@@ -2,8 +2,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Group, PayoutCycle
-from .forms import GroupForm, ContributionForm
+from .forms import GroupForm, ContributionForm, MemberManagementForm
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib import messages
+
+
 
 @login_required
 def dashboard(request):
@@ -58,19 +62,59 @@ def manage_cycle(request):
     
     return redirect('dashboard')
 
-
 @login_required
 def group_detail(request, group_id):
     group = get_object_or_404(Group, id=group_id)
 
-    # Ensure the user is part of the group
     if request.user not in group.members.all():
         messages.error(request, "You are not authorized to view this group.")
         return redirect('dashboard')
 
-    contributions = group.contribution_set.all()
+    form = MemberManagementForm()
+
+    if request.method == 'POST':
+        if 'generate_code' in request.POST:
+            group.generate_join_code()
+            messages.success(request, f"Join code generated: {group.join_code}")
+        elif 'manage_member' in request.POST:
+            form = MemberManagementForm(request.POST)
+            if form.is_valid():
+                user = form.cleaned_data['user']
+                action = form.cleaned_data['action']
+                if action == 'add':
+                    group.members.add(user)
+                    messages.success(request, f"{user.username} added to the group.")
+                elif action == 'remove':
+                    if user == group.admin:
+                        messages.error(request, "Admin cannot be removed from the group.")
+                    else:
+                        group.members.remove(user)
+                        messages.success(request, f"{user.username} removed from the group.")
+        return redirect('group_detail', group_id=group.id)
 
     return render(request, 'contributions/group_detail.html', {
         'group': group,
-        'contributions': contributions
+        'form': form
     })
+
+
+#   contributions = group.contribution_set.all()
+#  'contributions': contributions
+
+
+@login_required
+def join_group(request):
+    if request.method == 'POST':
+        join_code = request.POST.get('group_code')
+        
+        try:
+            group = Group.objects.get(join_code=join_code)
+            if request.user in group.members.all():
+                messages.info(request, "You are already a member of this group.")
+            else:
+                group.members.add(request.user)
+                messages.success(request, f"You have successfully joined {group.name}.")
+        except Group.DoesNotExist:
+            messages.error(request, "Invalid join code. Please try again.")
+        
+    return redirect('dashboard')
