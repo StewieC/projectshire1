@@ -1,0 +1,28 @@
+{% extends 'contributions/base.html' %}
+
+{% block title %}{{ group.name }} Details{% endblock %}
+
+{% block content %}
+<h1>{{ group.name }}</h1>
+<p>Weekly Contribution: {{ group.weekly_contribution }} Ksh</p>
+
+<h2>Members</h2>
+<ul>
+    {% for member in group.members.all %}
+        <li>{{ member.username }}</li>
+    {% endfor %}
+</ul>
+
+<h2>Contributions</h2>
+{% if contributions %}
+    <ul>
+        {% for contribution in contributions %}
+            <li>{{ contribution.member.username }} - {{ contribution.amount }} Ksh ({{ contribution.date }})</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No contributions have been made yet.</p>
+{% endif %}
+
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

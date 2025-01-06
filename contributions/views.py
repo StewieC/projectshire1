@@ -57,3 +57,20 @@ def manage_cycle(request):
         # Handle payout logic and interest deduction
     
     return redirect('dashboard')
+
+
+@login_required
+def group_detail(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+
+    # Ensure the user is part of the group
+    if request.user not in group.members.all():
+        messages.error(request, "You are not authorized to view this group.")
+        return redirect('dashboard')
+
+    contributions = group.contribution_set.all()
+
+    return render(request, 'contributions/group_detail.html', {
+        'group': group,
+        'contributions': contributions
+    })
