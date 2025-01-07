@@ -6,6 +6,8 @@ from .forms import GroupForm, ContributionForm, MemberManagementForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib import messages
+import uuid
+
 
 
 
@@ -118,3 +120,29 @@ def join_group(request):
             messages.error(request, "Invalid join code. Please try again.")
         
     return redirect('dashboard')
+
+@login_required
+def create_group(request):
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            group = form.save(commit=False)
+            group.admin = request.user  # Automatically set the user as admin
+            group.save()
+            group.add_member(request.user)  # Add the creator as a member
+            messages.success(request, 'Group created successfully!')
+            return redirect('dashboard')
+    else:
+        form = GroupForm()
+    return render(request, 'contributions/create_group.html', {'form': form})
+
+@login_required
+def generate_join_code(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    if request.user == group.admin:
+        group.join_code = str(uuid.uuid4())[:8]
+        group.save()
+        messages.success(request, f'Join code generated: {group.join_code}')
+    else:
+        messages.error(request, 'You are not authorized to generate a join code.')
+    return redirect('group_detail', group_id=group.id)

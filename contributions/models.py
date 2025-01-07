@@ -11,10 +11,19 @@ class Group(models.Model):
     interest_rate = models.DecimalField(max_digits=5, decimal_places=2, default=25)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin_groups')
     join_code = models.CharField(max_length=8, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    def generate_join_code(self):
-        self.join_code = str(uuid.uuid4().hex)[:8]
-        self.save()
+    def save(self, *args, **kwargs):
+        if not self.join_code:
+            self.join_code = str(uuid.uuid4())[:8]  # Generate unique join code
+        super().save(*args, **kwargs)
+
+    def add_member(self, user):
+        self.members.add(user)
+
+    def remove_member(self, user):
+        self.members.remove(user)
+
 
     def __str__(self):
         return self.name
