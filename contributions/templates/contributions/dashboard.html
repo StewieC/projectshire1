@@ -9,10 +9,19 @@
 {% if groups %}
     <ul>
         {% for group in groups %}
-            <li>
-                {{ group.name }} - Contribution: {{ group.weekly_contribution }} Ksh
-                <a href="{% url 'group_detail' group.id %}">View Details</a>
-            </li>
+        <li>
+            <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a> 
+            {% if group.admin == user %}
+                (Admin)
+            {% endif %}
+            
+            {% for payout in next_payouts %}
+                {% if payout.group == group %}
+                    <p>Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
+                {% endif %}
+            {% endfor %}
+            <
+        </li>
         {% endfor %}
     </ul>
 {% else %}

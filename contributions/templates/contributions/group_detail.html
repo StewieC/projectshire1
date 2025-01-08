@@ -3,8 +3,43 @@
 {% block title %}{{ group.name }} Details{% endblock %}
 
 {% block content %}
-<h1>{{ group.name }}</h1>
-<p>Weekly Contribution: {{ group.weekly_contribution }} Ksh</p>
+<h1>{{ group.name }} Details</h1>
+<p>Admin: {{ group.admin.username }}</p>
+<p>Weekly Contribution: Ksh {{ group.weekly_contribution }}</p>
+<p>Total Group Balance: Ksh {{ total_balance }}</p>
+
+
+<form method="post" action="{% url 'contribute' %}">
+    {% csrf_token %}
+    <input type="hidden" name="group_id" value="{{ group.id }}">
+    <input type="number" name="amount" placeholder="Amount to contribute">
+    <button type="submit">Contribute</button>
+</form>
+
+<h2>Contribution History</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contribution in contributions %}
+        <tr>
+            <td>{{ contribution.member.username }}</td>
+            <td>KES {{ contribution.amount }}</td>
+            <td>{{ contribution.contribution_date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No contributions yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <h2>Members</h2>
 <ul>

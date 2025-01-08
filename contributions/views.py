@@ -1,12 +1,14 @@
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Group, PayoutCycle
+from .models import Group, PayoutCycle, Contribution
 from .forms import GroupForm, ContributionForm, MemberManagementForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib import messages
 import uuid
+from django.db.models import Sum
+from django.db import models
 
 
 
@@ -14,9 +16,18 @@ import uuid
 @login_required
 def dashboard(request):
     groups = Group.objects.filter(members=request.user)
+    contributions = Contribution.objects.filter(group__in=groups)
+    
+    # Calculate total balance for each group
+    group_balances = contributions.values('group').annotate(total_amount=Sum('amount'))
+
+    # Fetch the next payout cycle for each group
+    next_payouts = PayoutCycle.objects.filter(group__in=groups, status=False).order_by('payout_date')
     group_form = GroupForm()
 
-    if 'name' in request.POST:  # Group creation
+    if request.method == 'POST':
+        
+     if 'name' in request.POST:  # Group creation
         group_form = GroupForm(request.POST)
         if group_form.is_valid():
             group = group_form.save(commit=False)  # Prevent immediate save
@@ -34,24 +45,33 @@ def dashboard(request):
 
     return render(request, 'contributions/dashboard.html', {
         'groups': groups,
-        'group_form': group_form
+        'group_form': group_form,
+        'group_balances': group_balances,
+        'next_payouts': next_payouts
     })
     
     
 @login_required
 def contribute(request):
     if request.method == 'POST':
-        form = ContributionForm(request.POST)
-        if form.is_valid():
-            contribution = form.save(commit=False)
-            contribution.member = request.user
-            contribution.group = Group.objects.first()  # Assign the first group for simplicity
+        group_id = request.POST.get('group_id')
+        amount = request.POST.get('amount')
+        
+        group = get_object_or_404(Group, id=group_id)
+        
+        if amount and float(amount) > 0:
+            contribution = Contribution(
+                member=request.user,
+                group=group,
+                amount=amount
+            )
             contribution.save()
-            return redirect('dashboard')
-    else:
-        form = ContributionForm()
+            messages.success(request, f"You contributed KES {amount} to {group.name}.")
+        else:
+            messages.error(request, "Invalid amount entered.")
 
-    return render(request, 'contributions/contribute.html', {'form': form})
+    return redirect('dashboard')
+
 
 @login_required
 def manage_cycle(request):
@@ -68,10 +88,16 @@ def manage_cycle(request):
 @login_required
 def group_detail(request, group_id):
     group = get_object_or_404(Group, id=group_id)
+    contributions = Contribution.objects.filter(group=group).order_by('-contribution_date')
 
     if request.user not in group.members.all():
         messages.error(request, "You are not authorized to view this group.")
         return redirect('dashboard')
+    
+    
+    contributions = group.contribution_set.all()  # Fetch all contributions for this group
+    total_balance = contributions.aggregate(total=models.Sum('amount'))['total'] or 0
+
 
     form = MemberManagementForm()
 
@@ -97,7 +123,9 @@ def group_detail(request, group_id):
 
     return render(request, 'contributions/group_detail.html', {
         'group': group,
-        'form': form
+        'form': form,
+        'contributions': contributions,
+        'total_balance': total_balance
     })
 
 
