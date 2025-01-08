@@ -16,14 +16,15 @@ def dashboard(request):
     groups = Group.objects.filter(members=request.user)
     group_form = GroupForm()
 
-    if request.method == 'POST':
-        if 'name' in request.POST:  # Group creation
-            group_form = GroupForm(request.POST)
-            if group_form.is_valid():
-                group = group_form.save()
-                group.members.add(request.user)
-                messages.success(request, 'Group created successfully.')
-                return redirect('dashboard')
+    if 'name' in request.POST:  # Group creation
+        group_form = GroupForm(request.POST)
+        if group_form.is_valid():
+            group = group_form.save(commit=False)  # Prevent immediate save
+            group.admin = request.user  # Set admin to current user
+            group.save()  # Now save the group
+            group.members.add(request.user)  # Add creator as member
+            messages.success(request, 'Group created successfully.')
+            return redirect('dashboard')
         elif 'group_code' in request.POST:  # Joining a group
             group_id = request.POST.get('group_code')
             group = get_object_or_404(Group, id=group_id)
