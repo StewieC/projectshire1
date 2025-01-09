@@ -9,6 +9,8 @@ from django.contrib import messages
 import uuid
 from django.db.models import Sum
 from django.db import models
+from datetime import timedelta
+from django.utils.timezone import now, timedelta
 
 
 
@@ -124,6 +126,17 @@ def group_detail(request, group_id):
                         group.members.remove(user)
                         messages.success(request, f"{user.username} removed from the group.")
         return redirect('group_detail', group_id=group.id)
+    
+    
+     # Calculate next payout
+    members = group.members.all().order_by('username')  # Alphabetical order
+    total_balance = group.contribution_set.aggregate(total=models.Sum('amount'))['total'] or 0
+    cycle_length = group.payoutcycle_set.count()
+
+    # Find the next member to receive payout
+    next_member_index = cycle_length % members.count()  # Circular index
+    next_member = members[next_member_index]
+    next_payout_date = (now() + timedelta(days=(6 - now().weekday()))).replace(hour=8, minute=0, second=0, microsecond=0)
 
     return render(request, 'contributions/group_detail.html', {
         'group': group,
@@ -131,6 +144,8 @@ def group_detail(request, group_id):
         'contributions': contributions,
         'total_balance': total_balance,
         'group_balances': group_balances,
+        'next_member': next_member,
+        'next_payout_date': next_payout_date,
     })
 
 

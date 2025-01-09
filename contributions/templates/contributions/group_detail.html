@@ -41,6 +41,13 @@
     </tbody>
 </table>
 
+<p><strong>Next Payout:</strong></p>
+<ul>
+    <li>Member: {{ next_member.username }}</li>
+    <li>Date: {{ next_payout_date|date:"D, d M Y, h:i A" }}</li>
+    <li>Amount: {{ total_balance|floatformat:2 }}</li>
+</ul>
+
 <h2>Members</h2>
 <ul>
     {% for member in group.members.all %}
