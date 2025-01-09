@@ -1,0 +1,13 @@
+{% extends 'contributions/base.html' %}
+
+{% block content %}
+<h1>Join Group</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="group_code">Enter Join Code:</label>
+    <input type="text" id="group_code" name="group_code" required>
+    <button type="submit">Join</button>
+</form>
+<hr>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

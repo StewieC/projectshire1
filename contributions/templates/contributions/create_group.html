@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'contributions/base.html' %}
 
 {% block content %}
 <h1>Create Group</h1>
@@ -7,4 +7,6 @@
     {{ form.as_p }}
     <button type="submit">Create Group</button>
 </form>
+<hr>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
 {% endblock %}

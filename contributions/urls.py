@@ -7,6 +7,6 @@ urlpatterns = [
     path('contribute/', views.contribute, name='contribute'),
     path('cycle/', views.manage_cycle, name='cycle'),
     path('group/<int:group_id>/', views.group_detail, name='group_detail'),
-    path('create_group/', views.dashboard, name='create_group'),  # Reuse dashboard logic
-    path('join_group/', views.dashboard, name='join_group'),      # Reuse dashboard logic
+    path('create_group/', views.create_group, name='create_group'),  # Reuse dashboard logic
+    path('join_group/', views.join_group, name='join_group'),      # Reuse dashboard logic
 ]

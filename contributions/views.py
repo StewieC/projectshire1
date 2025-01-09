@@ -16,38 +16,38 @@ from django.db import models
 @login_required
 def dashboard(request):
     groups = Group.objects.filter(members=request.user)
-    contributions = Contribution.objects.filter(group__in=groups)
+    # contributions = Contribution.objects.filter(group__in=groups)
     
-    # Calculate total balance for each group
-    group_balances = contributions.values('group').annotate(total_amount=Sum('amount'))
+    # # Calculate total balance for each group
+    # group_balances = contributions.values('group').annotate(total_amount=Sum('amount'))
 
-    # Fetch the next payout cycle for each group
-    next_payouts = PayoutCycle.objects.filter(group__in=groups, status=False).order_by('payout_date')
-    group_form = GroupForm()
+    # # Fetch the next payout cycle for each group
+    # next_payouts = PayoutCycle.objects.filter(group__in=groups, status=False).order_by('payout_date')
+    # group_form = GroupForm()
 
-    if request.method == 'POST':
+    # if request.method == 'POST':
         
-     if 'name' in request.POST:  # Group creation
-        group_form = GroupForm(request.POST)
-        if group_form.is_valid():
-            group = group_form.save(commit=False)  # Prevent immediate save
-            group.admin = request.user  # Set admin to current user
-            group.save()  # Now save the group
-            group.members.add(request.user)  # Add creator as member
-            messages.success(request, 'Group created successfully.')
-            return redirect('dashboard')
-        elif 'group_code' in request.POST:  # Joining a group
-            group_id = request.POST.get('group_code')
-            group = get_object_or_404(Group, id=group_id)
-            group.members.add(request.user)
-            messages.success(request, 'Successfully joined the group.')
-            return redirect('dashboard')
+    #  if 'name' in request.POST:  # Group creation
+    #     group_form = GroupForm(request.POST)
+    #     if group_form.is_valid():
+    #         group = group_form.save(commit=False)  # Prevent immediate save
+    #         group.admin = request.user  # Set admin to current user
+    #         group.save()  # Now save the group
+    #         group.members.add(request.user)  # Add creator as member
+    #         messages.success(request, 'Group created successfully.')
+    #         return redirect('dashboard')
+    #     elif 'group_code' in request.POST:  # Joining a group
+    #         group_id = request.POST.get('group_code')
+    #         group = get_object_or_404(Group, id=group_id)
+    #         group.members.add(request.user)
+    #         messages.success(request, 'Successfully joined the group.')
+    #         return redirect('dashboard')
 
     return render(request, 'contributions/dashboard.html', {
         'groups': groups,
-        'group_form': group_form,
-        'group_balances': group_balances,
-        'next_payouts': next_payouts
+        # 'group_form': group_form,
+        # 'group_balances': group_balances,
+        # 'next_payouts': next_payouts
     })
     
     
@@ -97,6 +97,10 @@ def group_detail(request, group_id):
     
     contributions = group.contribution_set.all()  # Fetch all contributions for this group
     total_balance = contributions.aggregate(total=models.Sum('amount'))['total'] or 0
+    
+    # Calculate total balance for each group
+    group_balances = contributions.values('group').annotate(total_amount=Sum('amount'))
+
 
 
     form = MemberManagementForm()
@@ -125,7 +129,8 @@ def group_detail(request, group_id):
         'group': group,
         'form': form,
         'contributions': contributions,
-        'total_balance': total_balance
+        'total_balance': total_balance,
+        'group_balances': group_balances,
     })
 
 
@@ -133,11 +138,11 @@ def group_detail(request, group_id):
 #  'contributions': contributions
 
 
+
 @login_required
 def join_group(request):
     if request.method == 'POST':
         join_code = request.POST.get('group_code')
-        
         try:
             group = Group.objects.get(join_code=join_code)
             if request.user in group.members.all():
@@ -147,8 +152,9 @@ def join_group(request):
                 messages.success(request, f"You have successfully joined {group.name}.")
         except Group.DoesNotExist:
             messages.error(request, "Invalid join code. Please try again.")
-        
-    return redirect('dashboard')
+        return redirect('dashboard')
+    else:
+        return render(request, 'contributions/join_group.html')  # Ensure this template exists
 
 @login_required
 def create_group(request):
