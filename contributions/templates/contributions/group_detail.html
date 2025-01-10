@@ -48,6 +48,8 @@
     <li>Amount: {{ total_balance|floatformat:2 }}</li>
 </ul>
 
+<hr>
+
 <h2>Members</h2>
 <ul>
     {% for member in group.members.all %}
@@ -63,11 +65,11 @@
         <button type="submit" name="manage_member">Submit</button>
     </form>
 
-    <h2>Generate Join Code</h2>
+    <!-- <h2>Generate Join Code</h2>
     <form method="post" action="{% url 'group_detail' group.id %}">
         {% csrf_token %}
         <button type="submit" name="generate_code">Generate Code</button>
-    </form>
+    </form> -->
 
     {% if group.join_code %}
         <p>Join Code: <strong>{{ group.join_code }}</strong></p>
