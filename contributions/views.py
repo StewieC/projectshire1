@@ -146,6 +146,7 @@ def group_detail(request, group_id):
         'group_balances': group_balances,
         'next_member': next_member,
         'next_payout_date': next_payout_date,
+        'created_at': group.created_at,
     })
 
 

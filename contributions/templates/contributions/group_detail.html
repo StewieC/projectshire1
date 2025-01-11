@@ -3,6 +3,11 @@
 {% block title %}{{ group.name }} Details{% endblock %}
 
 {% block content %}
+
+<p><strong>Created At:</strong> {{ group.created_at|date:"D, d M Y, h:i A" }}</p>
+
+<hr>
+
 <h1>{{ group.name }} Details</h1>
 <p>Admin: {{ group.admin.username }}</p>
 <p>Weekly Contribution: Ksh {{ group.weekly_contribution }}</p>
