@@ -197,3 +197,20 @@ def generate_join_code(request, group_id):
     else:
         messages.error(request, 'You are not authorized to generate a join code.')
     return redirect('group_detail', group_id=group.id)
+
+
+#contribution history view
+@login_required
+def contribution_history(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+
+    if request.user not in group.members.all():
+        messages.error(request, "You are not authorized to view this group's history.")
+        return redirect('dashboard')
+
+    contributions = group.contribution_set.all().order_by('-contribution_date')  # Order by most recent
+
+    return render(request, 'contributions/history.html', {
+        'group': group,
+        'contributions': contributions,
+    })
