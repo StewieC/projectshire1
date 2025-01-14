@@ -10,4 +10,5 @@ urlpatterns = [
     path('create_group/', views.create_group, name='create_group'),  # Reuse dashboard logic
     path('join_group/', views.join_group, name='join_group'),      # Reuse dashboard logic
     path('group/<int:group_id>/history/', views.contribution_history, name='contribution_history'),
+    path('help/', views.help_page, name='help_page'),
 ]

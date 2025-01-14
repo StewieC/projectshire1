@@ -10,6 +10,7 @@
         <h1>Welcome to the Manage Pesa App</h1>
         {% if user.is_authenticated %}
            <a href="{% url 'dashboard' %}">dashboard</a>
+           <a href="{% url 'help_page' %}" class="btn btn-info">Help</a>
         {% else %}
             <a href="{% url 'login' %}">Login</a>
         {% endif %}

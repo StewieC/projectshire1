@@ -214,3 +214,8 @@ def contribution_history(request, group_id):
         'group': group,
         'contributions': contributions,
     })
+    
+    
+@login_required    
+def help_page(request):
+    return render(request, 'contributions/help.html')
