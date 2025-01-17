@@ -1,10 +1,10 @@
-/* General Reset
-* {
+
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-}
+} */
 
 /* Body Styling */
 body {
@@ -19,7 +19,7 @@ body {
 
 /* Header */
 header {
-    background-color: #2f2f2f; /* Dark grey */
+    background-color: #979494; /* Dark grey */
     color: #fff;
     padding: 1rem 2rem;
     text-align: center;
