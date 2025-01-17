@@ -1,4 +1,4 @@
-/* General Reset */
+/* General Reset
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +13,8 @@ body {
     font-size: 16px;
     line-height: 1.6;
     transition: all 0.3s ease-in-out;
+    font-size: 16px;
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -23,6 +25,53 @@ header {
     text-align: center;
     font-size: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/*navbar*/
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.navbar ul li a:hover {
+    background-color: #555; /* Slightly lighter gray */
+    border-radius: 5px;
+}
+
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    animation: slideInUp 0.7s ease-in-out;
 }
 
 /* Buttons */
@@ -202,4 +251,4 @@ table th {
 .sidebar a:hover {
     background-color: #444;
     color: #fff;
-}
+} 
