@@ -106,16 +106,81 @@ a:hover {
 .card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 10px;
     padding: 1.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+}
+
+/* Card header styling */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Dark grey text */
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.card-title:hover {
+    color: #000; /* Slightly darker hover effect */
+}
+
+.admin-badge {
+    background-color: #ffcc00; /* Yellow background for admin badge */
+    color: #333;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Card body styling */
+.card-body {
+    margin-top: 10px;
+}
+
+.payout-details {
+    font-size: 14px;
+    color: #666; /* Medium grey text */
+}
+
+/* Mobile responsive design */
+@media (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 16px;
+    }
+
+    .payout-details {
+        font-size: 12px;
+    }
 }
 
 /* Forms */

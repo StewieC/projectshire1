@@ -16,23 +16,30 @@
 
 <h2>Your Groups</h2>
 {% if groups %}
-    <ul>
-        {% for group in groups %}
-        <li>
-            <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a> 
-            {% if group.admin == user %}
-                (Admin)
-            {% endif %}
-            
-            {% for payout in next_payouts %}
-                {% if payout.group == group %}
-                    <p>Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
+  <div class="groups">
+        <ul class="card-list">
+            {% for group in groups %}
+            <li class="card">
+                <div class="card-header">
+                <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a> 
+                <div class="admin-badge">
+                {% if group.admin == user %}
+                    (Admin)
                 {% endif %}
+                </div>
+                </div>
+                {% for payout in next_payouts %}
+                <div class="card-body">
+                    {% if payout.group == group %}
+                    <p class="payout-details">Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <
+            </li>
             {% endfor %}
-            <
-        </li>
-        {% endfor %}
-    </ul>
+        </ul>
+    </div>
 {% else %}
     <p>You are not part of any groups yet.</p>
 {% endif %}
