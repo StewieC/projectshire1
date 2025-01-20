@@ -11,7 +11,7 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f2f2f2; /* Light grey background */
+    background-color: #f4f4f4; /* Light grey background */
     color: #333;
 }
 
@@ -93,6 +93,130 @@ header {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+/* Left Section Styling */
+.left-section {
+    flex: 1 1 45%;
+    background: linear-gradient(145deg, #e4e4e4, #cfcfcf);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1), -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+
+.left-section h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.left-section p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.action-buttons .button {
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    transition: transform 0.3s, background-color 0.3s;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.action-buttons .button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+}
+
+/* Right Section Styling */
+.right-section {
+    flex: 1 1 45%;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1), -2px -2px 6px rgba(255, 255, 255, 0.7);
+}
+
+.right-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.groups {
+    margin-top: 1.5rem;
+}
+
+.group-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.group-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.group-link {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.group-link:hover {
+    color: #555;
+}
+
+.badge {
+    background-color: #e67e22;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+/* Hover Animations */
+.group-item p {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #777;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .left-section, .right-section {
+        flex: 1 1 100%;
+    }
+}
+
 
 /* Background image */
 body::before {
