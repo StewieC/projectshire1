@@ -3,25 +3,25 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="content">
+<section class="hero">
     <!--Left Section-->
-    <div class="hero">
+    <div class="hero-text">
         <h1>Welcome, {{ user.username }}</h1>
         <p>Manage your group funds with ease. Check out your groups or join new ones!</p>
 
 
     <h1>Dashboard</h1>
+
 <!--buttons for group actions-->
-    <div class="action-buttons">
-        <a href="{% url 'create_group' %}" class="button">Create Group</a>
-        <a href="{% url 'join_group' %}" class="button">Join Group</a>
-    </div>
+    
+        <a href="{% url 'create_group' %}">Create Group</a>
+        <a href="{% url 'join_group' %}" class="ctaa">Join Group</a>
+    
     </div>
 
 
 <!--right section-->
-<div class="left-section">
-<div class="groups-container">
+
     <h2>Your Groups</h2>
     
     {% if groups %}
@@ -48,8 +48,7 @@
 {% endif %}
         </div>
     </div>
-</div>
-</div>
+
 
 <!-- Create Group Section -->
 <!-- <h2>Create a New Group</h2>
