@@ -30,6 +30,7 @@
         {% if user.is_authenticated %}
            <li><a href="{% url 'dashboard' %}">dashboard</a></li>
            <li><a href="{% url 'help_page' %}" class="btn btn-info">Help</a></li>
+           <li><a href="{% url 'logout' %}">Logout</a></li>
         {% else %}
             <li><a href="{% url 'login' %}">Login</a></li>
         {% endif %}
@@ -51,9 +52,9 @@
 
     
     <!--logout button-->
-    <div class="logout">
-        <a href="{% url 'logout' %}">Logout</a>
-    </div>
+   
+
+    
          
 <!--link icons-->
     <div class="icons">
