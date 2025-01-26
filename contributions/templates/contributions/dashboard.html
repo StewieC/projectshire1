@@ -17,23 +17,22 @@
         <a href="{% url 'create_group' %}">Create Group</a>
         <a href="{% url 'join_group' %}" class="ctaa">Join Group</a>
 
-        <h4>Your Groups</h4>
+    <h4>Your Groups</h4>
     
-            {% if groups %}
+    {% if groups %}
             {% for group in groups %}
-            <li class="group-item"></li></li>
-                <a href="{% url 'group_detail' group.id %}" class="group-link">{{ group.name }}</a> 
+            <li class="group-items">
+                <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a> 
 
                 {% if group.admin == user %}
                 <span class="badge">(Admin)</span>
                 {% endif %}
                 {% for payout in next_payouts %}
                     {% if payout.group == group %}
-                    <p class="payout-info">Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
+                    <p>Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
                     {% endif %}
                 {% endfor %}
             </li>
-            {% endfor %}
             {% endfor %}
        
 {% else %}

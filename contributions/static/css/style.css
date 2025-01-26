@@ -133,7 +133,7 @@ section{
     transition: all .55s ease;
 }
 
-.hero-text li.groups{
+.hero-text li.group-items a{
     display: block;
     margin-bottom: 20px;
     color: white;
