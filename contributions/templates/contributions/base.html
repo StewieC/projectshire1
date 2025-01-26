@@ -24,7 +24,7 @@
 </head>
 <body>
     <header>
-        <a href="#" class="logo">Comfort</a>
+        <a href="#" class="logo">SC</a>
         <!-- <h1>Welcome to the Manage Pesa App</h1> -->
         <ul class="navlist">
         {% if user.is_authenticated %}
@@ -46,12 +46,15 @@
         </div>
         {% endif %}
         
-    <section class="hero">
-    {% block content %}{% endblock %}
-    <!--logout button-->
-        <a href="{% url 'logout' %}">Logout</a>
-    </section>
     
+    {% block content %}{% endblock %}
+
+    
+    <!--logout button-->
+    <div class="logout">
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+         
 <!--link icons-->
     <div class="icons">
         <a href="#"> <i class="ri-instagram-line"></i></a>
