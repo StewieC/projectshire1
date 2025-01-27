@@ -5,7 +5,7 @@
     font-family: 'Poppins', sans-serif;
     list-style: none;
     text-decoration: none;
-
+    
     
 }
 
@@ -151,6 +151,12 @@ section{
     transition: all 0.55s ease;
 }
 
+.hero-text li.group-items a:hover{
+    background: transparent;
+    border: 1px solid white;
+    transform: translate(8px);
+}
+
 .hero-text a:hover{
     background: transparent;
     border: 1px solid white;
@@ -200,7 +206,7 @@ section{
     padding: 12px;
     font-size: 25px;
     color: white;
-    background: #4d9559;
+    background: #4c4d4c;
     border-radius: 30px;
     transition: all .50s ease;
 }
