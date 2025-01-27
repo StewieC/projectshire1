@@ -58,18 +58,19 @@ header {
     display: none;
 }
 
-.hero{
+.hero {
     height: 100%;
     width: 100%;
     min-height: 100vh;
     background: linear-gradient(254.59deg, #bbbbbb 0%, #4e4e4e 28.53%, #050505 75.52%);
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    gap: 2rem;
-    top: 20px;
+    display: flex; /* Switch to Flexbox for easier centering */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    gap: 1.5rem; /* Space between elements */
+    padding: 20px; /* Add padding to prevent edge clipping */
 }
+
 
 section{
     padding: 0 19%;
@@ -133,19 +134,21 @@ section{
     transition: all .55s ease;
 }
 
-.hero-text li.group-items a{
+/* Adjust button size */
+.hero-text li.group-items a {
     display: block;
-    margin-bottom: 20px;
+    width: auto; /* Allow the button width to adapt to content */
+    margin-bottom: 15px; /* Slightly reduce spacing between buttons */
     color: white;
     background: #4e4e4e;
     border: 1px solid transparent;
-    padding: 12px 30px;
-    line-height: 1.4;
-    font-size: 14px;
+    padding: 8px 20px; /* Reduce padding for smaller buttons */
+    line-height: 1.2; /* Adjust line height */
+    font-size: 13px; /* Slightly smaller font size */
     font-weight: 500;
-    border-radius: 30px;
+    border-radius: 25px; /* Keep a rounded appearance */
     text-transform: uppercase;
-    transition: all .55s ease;
+    transition: all 0.55s ease;
 }
 
 .hero-text a:hover{
