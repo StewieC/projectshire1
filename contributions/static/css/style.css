@@ -62,7 +62,7 @@ header {
     height: 100%;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(254.59deg, #bbbbbb 0%, #4e4e4e 28.53%, #050505 75.52%);
+    background: linear-gradient(254.59deg, #999999 0%, #a8a8a8 28.53%, #424141 75.52%);
     display: flex; /* Switch to Flexbox for easier centering */
     flex-direction: column; /* Stack items vertically */
     justify-content: center; /* Center content vertically */
@@ -124,7 +124,7 @@ section{
 .hero-text a{
     display: inline-block;
     color: white;
-    background: #4e4e4e;
+    background: #3b3b3b;
     border: 1px solid transparent;
     padding: 12px 30px;
     line-height: 1.4;
