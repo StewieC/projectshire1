@@ -91,11 +91,12 @@ section{
     margin: 0 0 45px;
 }
 
-.hero-text h4{
+.hero-text h4 {
     font-size: 18px;
     font-weight: 600;
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Keep the current bottom margin */
+    margin-top: 40px; /* Add space above the "Your Groups" heading */
 }
 
 .hero-text h2{
@@ -191,7 +192,7 @@ section{
 }
 
 .icons i:hover{
-    color: #4d9559;
+    color: #797979;
     transform: translate(-5px);
 }
 
