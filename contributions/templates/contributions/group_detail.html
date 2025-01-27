@@ -22,7 +22,7 @@
     <button type="submit">Contribute</button>
 </form>
 
-<a href="{% url 'contribution_history' group.id %}" class="btn btn-primary">View Contribution History</a>
+<a href="{% url 'contribution_history' group.id %}">View Contribution History</a>
 
 
 <p><strong>Next Payout:</strong></p>
@@ -40,6 +40,8 @@
         <p>{{ member.username }}</p>
     {% endfor %}
 </ul>
+
+<hr>
 
 {% if user == group.admin %}
     <h2>Manage Members</h2>

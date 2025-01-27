@@ -106,6 +106,7 @@ section{
     color: white;
     margin: 0 0 45px;
     top: auto;
+    margin-top: 20px;
 }
 
 
@@ -113,7 +114,7 @@ section{
     color: white;
     font-size: 15px;
     line-height: 1.9;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .hero-img img{
@@ -133,21 +134,23 @@ section{
     border-radius: 30px;
     text-transform: uppercase;
     transition: all .55s ease;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* Adjust button size */
 .hero-text li.group-items a {
     display: block;
-    width: auto; /* Allow the button width to adapt to content */
-    margin-bottom: 15px; /* Slightly reduce spacing between buttons */
+    width: auto; /* Let the width adapt to the content */
+    margin-bottom: 15px; /* Space between buttons */
     color: white;
     background: #4e4e4e;
     border: 1px solid transparent;
-    padding: 8px 20px; /* Reduce padding for smaller buttons */
-    line-height: 1.2; /* Adjust line height */
-    font-size: 13px; /* Slightly smaller font size */
+    padding: 6px 15px; /* Reduce padding for a smaller button */
+    line-height: 1.2; /* Keep a compact line height */
+    font-size: 12px; /* Slightly reduce font size */
     font-weight: 500;
-    border-radius: 25px; /* Keep a rounded appearance */
+    border-radius: 25px; /* Maintain rounded appearance */
     text-transform: uppercase;
     transition: all 0.55s ease;
 }
@@ -176,13 +179,14 @@ section{
 }
 
 .icons{
-    position: absolute;
+    position: fixed;
     top: 50%;
     padding: 0.9%;
     transform: translate(-50%);
 }
 
 .icons i{
+
     display: block;
     margin: 20px 0;
     font-size: 24px;
@@ -196,22 +200,21 @@ section{
     transform: translate(-5px);
 }
 
-.scroll-down{
-    position: absolute;
-    bottom: 6%;
-    right: 9%;
+.scroll-down {
+    position: fixed; /* Change from absolute to fixed */
+    bottom: 6%; /* Maintain the bottom spacing */
+    right: 9%; /* Maintain the right spacing */
 }
 
-.scroll-down i{
+.scroll-down i {
     display: block;
     padding: 12px;
     font-size: 25px;
     color: white;
     background: #4c4d4c;
     border-radius: 30px;
-    transition: all .50s ease;
+    transition: all 0.50s ease;
 }
-
 .scroll-down i:hover{
     transform: translateY(-5px);
 }
@@ -295,7 +298,7 @@ section{
         right: -100%;
         width: 300px;
         height: 40vh;
-        background: #4d9559;
+        background: #6e6e6e;
         display: flex;
         align-items: center;
         flex-direction: column;
