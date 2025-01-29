@@ -146,7 +146,7 @@ section{
     color: white;
     background: #4e4e4e;
     border: 1px solid transparent;
-    padding: 6px 15px; /* Reduce padding for a smaller button */
+    padding: 12px 30px; /* Reduce padding for a smaller button */
     line-height: 1.2; /* Keep a compact line height */
     font-size: 12px; /* Slightly reduce font size */
     font-weight: 500;
