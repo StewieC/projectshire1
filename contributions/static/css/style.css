@@ -140,7 +140,7 @@ section{
 
 /* Adjust button size */
 .hero-text li.group-items a {
-    display: block;
+    display: inline-block;
     width: auto; /* Let the width adapt to the content */
     margin-bottom: 15px; /* Space between buttons */
     color: white;

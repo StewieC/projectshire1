@@ -21,7 +21,7 @@
     {% if groups %}
             {% for group in groups %}
             <li class="group-items">
-                <a href="{% url 'group_detail' group.id %}">{{ group.name }} {% if group.admin == user %}<span class="badge">(Admin)</span>{% endif %}</a> 
+                <a class="group-button" href="{% url 'group_detail' group.id %}">{{ group.name }} {% if group.admin == user %}<span class="badge">(Admin)</span>{% endif %}</a> 
                 {% for payout in next_payouts %}
                     {% if payout.group == group %}
                     <p>Next Payout: {{ payout.recipient }} on {{ payout.payout_date }}</p>
