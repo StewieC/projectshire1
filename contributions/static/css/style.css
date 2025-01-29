@@ -62,7 +62,7 @@ header {
     height: 100%;
     width: 100%;
     min-height: 100vh;
-    background: linear-gradient(254.59deg, #999999 0%, #a8a8a8 28.53%, #424141 75.52%);
+    background: linear-gradient(254.59deg, #ececec 0%, #a8a8a8 28.53%, #cacaca 75.52%);
     display: flex; /* Switch to Flexbox for easier centering */
     flex-direction: column; /* Stack items vertically */
     justify-content: center; /* Center content vertically */
@@ -138,27 +138,30 @@ section{
     margin-bottom: 20px;
 }
 
-/* Adjust button size */
-.hero-text li.group-items a {
-    display: inline-block;
-    width: auto; /* Let the width adapt to the content */
-    margin-bottom: 15px; /* Space between buttons */
-    color: white;
-    background: #4e4e4e;
-    border: 1px solid transparent;
-    padding: 12px 30px; /* Reduce padding for a smaller button */
-    line-height: 1.2; /* Keep a compact line height */
-    font-size: 12px; /* Slightly reduce font size */
-    font-weight: 500;
-    border-radius: 25px; /* Maintain rounded appearance */
-    text-transform: uppercase;
-    transition: all 0.55s ease;
+.hero-text li.group-items {
+    list-style: none; /* Remove bullet points */
+    margin-bottom: 10px; /* Space between buttons */
 }
 
-.hero-text li.group-items a:hover{
-    background: transparent;
-    border: 1px solid white;
-    transform: translate(8px);
+/* Adjust button size */
+.hero-text li.group-items a.group-button {
+    display: inline-block;
+    background: #4e4e4e;  /* Same as "Create Group" */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.group-button:hover {
+    background: white;
+    color: #4e4e4e;
+    border: 1px solid #4e4e4e;
 }
 
 .hero-text a:hover{
