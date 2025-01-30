@@ -3,12 +3,13 @@
 {% block title %}{{ group.name }} Details{% endblock %}
 
 {% block content %}
-
+<section class="hero">
+<div class="hero-text">   
 <p><strong>Created At:</strong> {{ group.created_at|date:"D, d M Y, h:i A" }}</p>
 
 <hr>
 
-<h1>{{ group.name }} Details</h1>
+<h2>{{ group.name }} Details</h2>
 <p>Admin: {{ group.admin.username }}</p>
 <p>Weekly Contribution: Ksh {{ group.weekly_contribution }}</p>
 <p>Total Group Balance: Ksh {{ total_balance }}</p>
@@ -21,39 +22,14 @@
     <button type="submit">Contribute</button>
 </form>
 
-<a href="{% url 'contribution_history' group.id %}" class="btn btn-primary">View Contribution History</a>
+<a href="{% url 'contribution_history' group.id %}">View Contribution History</a>
 
-<!-- 
-<h2>Contribution History</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>User</th>
-            <th>Amount</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for contribution in contributions %}
-        <tr>
-            <td>{{ contribution.member.username }}</td>
-            <td>KES {{ contribution.amount }}</td>
-            <td>{{ contribution.contribution_date }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="3">No contributions yet.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table> -->
 
 <p><strong>Next Payout:</strong></p>
 <ul>
-    <li>Member: {{ next_member.username }}</li>
-    <li>Date: {{ next_payout_date|date:"D, d M Y, h:i A" }}</li>
-    <li>Amount: {{ total_balance|floatformat:2 }}</li>
+    <p>Member: {{ next_member.username }}</p>
+    <p>Date: {{ next_payout_date|date:"D, d M Y, h:i A" }}</p>
+    <p>Amount: {{ total_balance|floatformat:2 }}</p>
 </ul>
 
 <hr>
@@ -61,9 +37,11 @@
 <h2>Members</h2>
 <ul>
     {% for member in group.members.all %}
-        <li>{{ member.username }}</li>
+        <p>{{ member.username }}</p>
     {% endfor %}
 </ul>
+
+<hr>
 
 {% if user == group.admin %}
     <h2>Manage Members</h2>
@@ -85,4 +63,6 @@
 {% endif %}
 
 <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</div> 
+</section>
 {% endblock %}
