@@ -5,321 +5,38 @@
     font-family: 'Poppins', sans-serif;
     list-style: none;
     text-decoration: none;
-    
-    
 }
 
-header {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 33px 9%;
-    transition: all 0.5s;
-    z-index: 1000;
-    background: transparent;
+body {
+    background-color: #F7F7F7; /* Warm Gray */
 }
 
-
-.logo{
-    font-size: 30px;
+/* Logo */
+.logo {
+    font-size: 1.75rem;
     font-weight: 700;
     color: white;
-    font-family: 'Permanent Marker', cursive;
 }
 
-.navlist{
-    display: flex;
+/* Custom Colors for Tailwind */
+:root {
+    --teal-600: #4ABDAC;
+    --charcoal: #333333;
+    --coral: #FC4A1A;
 }
 
-.navlist a{
-    color: white;
-    margin-left: 60px;
-    font-size: 15px;
-    font-weight: 600;
-    border-bottom: 2px solid tra;
-    transition: all .55s ease;
-}
-
-.navlist a:hover{
-    border-bottom: 2px solid white;
-}
-
-
-
-#menu-icon{
-    color: white;
-    font-size: 20px;
-    z-index: 10001;
-    cursor: pointer;
-    display: none;
-}
-
-.hero {
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
-    background: linear-gradient(254.59deg, #ececec 0%, #a8a8a8 28.53%, #cacaca 75.52%);
-    display: flex; /* Switch to Flexbox for easier centering */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    gap: 1.5rem; /* Space between elements */
-    padding: 20px; /* Add padding to prevent edge clipping */
-}
-
-
-section{
-    padding: 0 19%;
-}
-
-.hero-text h5{
-    font-size: 14px;
-    font-weight: 400;
-    color: white;
-    margin-bottom: 40px;
-}
-
-.hero-text h1{
-    font-family: 'Permanent Marker', cursive;
-    font-size: 90px;
-    line-height: 1;
-    color: white;
-    margin: 0 0 45px;
-}
-
-.hero-text h4 {
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 10px; /* Keep the current bottom margin */
-    margin-top: 40px; /* Add space above the "Your Groups" heading */
-}
-
-.hero-text h2{
-    font-family: 'Permanent Marker', cursive;
-    font-size: 50px;
-    line-height: 1;
-    color: white;
-    margin: 0 0 45px;
-    top: auto;
-    margin-top: 20px;
-}
-
-
-.hero-text p{
-    color: white;
-    font-size: 15px;
-    line-height: 1.9;
-    margin-bottom: 20px;
-}
-
-.hero-img img{
-    width: 700px;
-    height: auto;
-}
-
-.hero-text a{
-    display: inline-block;
-    color: white;
-    background: #3b3b3b;
-    border: 1px solid transparent;
-    padding: 12px 30px;
-    line-height: 1.4;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 30px;
-    text-transform: uppercase;
-    transition: all .55s ease;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.hero-text li.group-items {
-    list-style: none; /* Remove bullet points */
-    margin-bottom: 10px; /* Space between buttons */
-}
-
-/* Adjust button size */
-.hero-text li.group-items a.group-button {
-    display: inline-block;
-    background: #4e4e4e;  /* Same as "Create Group" */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 500;
-    text-transform: uppercase;
+/* Messages Styling */
+.messages p {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
     text-align: center;
-    text-decoration: none; /* Remove underline */
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
 }
-
-.group-button:hover {
-    background: white;
-    color: #4e4e4e;
-    border: 1px solid #4e4e4e;
-}
-
-.hero-text a:hover{
-    background: transparent;
-    border: 1px solid white;
-    transform: translate(8px);
-}
-
-.hero-text a.ctaa{
-    background: transparent;
-    border: 1px solid white;
-    margin-left: 20px;
-}
-
-.hero-text a.ctaa i{
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-.icons{
-    position: fixed;
-    top: 50%;
-    padding: 0.9%;
-    transform: translate(-50%);
-}
-
-.icons i{
-
-    display: block;
-    margin: 20px 0;
-    font-size: 24px;
+.messages p.success {
+    background-color: #4ABDAC;
     color: white;
-    transition: all .50s ease; 
-    margin-left: 80px;
 }
-
-.icons i:hover{
-    color: #797979;
-    transform: translate(-5px);
-}
-
-.scroll-down {
-    position: fixed; /* Change from absolute to fixed */
-    bottom: 6%; /* Maintain the bottom spacing */
-    right: 9%; /* Maintain the right spacing */
-}
-
-.scroll-down i {
-    display: block;
-    padding: 12px;
-    font-size: 25px;
+.messages p.error {
+    background-color: #FC4A1A;
     color: white;
-    background: #4c4d4c;
-    border-radius: 30px;
-    transition: all 0.50s ease;
-}
-.scroll-down i:hover{
-    transform: translateY(-5px);
-}
-
-@media (max-width: 1535px){
-    header{
-        padding: 15px 3%;
-        transition: .2s;
-    }
-
-    .icons{
-        padding: 0 3%;
-        transition: .2s;
-    }
-
-    .scroll-down{
-        right: 3%;
-        transition: .2s;
-    }
-}
-
-@media (max-width: 1460px) {
-    section{
-        padding: 0 12%;
-        transition: .2s;
-    }
-}
-
-@media (max-width: 1360px){
-    .hero-img img{
-        width: 100%;
-        height: auto;
-    }
-
-    .hero-text h1{
-        font-size: 75px;
-        margin: 0 0 30px;
-    }
-
-    .hero-text h5{
-        margin-bottom: 25px;
-    }
-}
-
-@media (max-width: 1195px){
-    section{
-        padding: 0 3%;
-        transition: .2s
-    }
-    .hero-text{
-        padding-top: 115px;
-    }
-    .hero-img{
-        text-align: center;
-    }
-    .hero-img img{
-        width: 560px;
-        height: auto;
-    }
-    .hero{
-        height: 100%;
-        gap: 1rem;
-        grid-template-columns: 1fr;
-    }
-    .icons{
-        display: none;
-    }
-    .scroll-down{
-        display: none;
-    }
-
-}
-
-@media (max-width: 990px){
-    #menu-icon{
-        display: block;
-    }
-    .navlist{
-        position: absolute;
-        top: 100%;
-        right: -100%;
-        width: 300px;
-        height: 40vh;
-        background: #6e6e6e;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 50px 20px;
-        transition: all .55s ease;
-    }
-    .navlist a{
-        margin-left: 0;
-        display: block; 
-        margin: 8px 0;
-    }
-    .navlist.open{
-        right: 0;
-    }
-}
-@media (max-width: 680px){
-    .hero-img img{
-        width: 100%;
-        height: auto;
-    }
 }
